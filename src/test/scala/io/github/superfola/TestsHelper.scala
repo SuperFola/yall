@@ -1,7 +1,7 @@
 package io.github.superfola
 
 object TestsHelper {
-  val addition    = "(+ 2 (* 3 4))"
+  val addition    = "(+ 2 (* 3 42))"
   val definition  = "(define six 6)"
   val affectation = "(set! six 7)"
   val condition   = "(if (not (> 3 (+ 4 2))) (* 3 6) 5)"
