@@ -40,4 +40,30 @@ class LexerSpec extends AnyFlatSpec with Matchers {
       EOFToken()
     )))
   }
+  it should "work with condition" in {
+    Lexer.fromString(condition) should be(Some(List(
+      LParenToken(),
+      SymbolToken("if"),
+      LParenToken(),
+      SymbolToken("not"),
+      LParenToken(),
+      SymbolToken(">"),
+      NumberToken("3"),
+      LParenToken(),
+      SymbolToken("+"),
+      NumberToken("4"),
+      NumberToken("2"),
+      RParenToken(),
+      RParenToken(),
+      RParenToken(),
+      LParenToken(),
+      SymbolToken("*"),
+      NumberToken("3"),
+      NumberToken("6"),
+      RParenToken(),
+      NumberToken("5"),
+      RParenToken(),
+      EOFToken()
+    )))
+  }
 }

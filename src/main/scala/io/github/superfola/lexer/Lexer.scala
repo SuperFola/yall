@@ -9,13 +9,13 @@ final case class PartialToken(token: Token, rest: List[Char])
 object Lexer {
   private def charType(c: Char): CharType =
     c match {
-      case '('                                     => LParenType()
-      case ')'                                     => RParenType()
-      case x if x.isDigit                          => NumberType(x)
-      case x if x.isLetter                         => SymbolType(x)
-      case '+' | '-' | '*' | '/' | ',' | '?' | '!' => SymbolType(c)
-      case x if x.isWhitespace                     => SpaceType()
-      case x                                       => MismatchType(x)
+      case '('                                                       => LParenType()
+      case ')'                                                       => RParenType()
+      case x if x.isDigit                                            => NumberType(x)
+      case x if x.isLetter                                           => SymbolType(x)
+      case '+' | '-' | '*' | '/' | ',' | '?' | '!' | '<' | '>' | '=' => SymbolType(c)
+      case x if x.isWhitespace                                       => SpaceType()
+      case x                                                         => MismatchType(x)
     }
 
   @tailrec
