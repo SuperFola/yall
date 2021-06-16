@@ -1,7 +1,6 @@
 package io.github.superfola.lexer
 
 import cats.implicits.toTraverseOps
-
 import scala.annotation.tailrec
 
 final case class PartialToken(token: Token, rest: List[Char])

@@ -4,6 +4,7 @@ import io.github.superfola.lexer.SymbolToken
 
 sealed trait Node
 
+final case class EmptyNode()                                                 extends Node
 final case class NumberNode(value: Double)                                   extends Node
 final case class SymbolNode(value: SymbolToken)                              extends Node
 final case class TupleNode(left: Node, right: Node)                          extends Node
