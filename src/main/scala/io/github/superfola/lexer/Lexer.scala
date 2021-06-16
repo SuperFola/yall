@@ -9,12 +9,13 @@ final case class PartialToken(token: Token, rest: List[Char])
 object Lexer {
   private def charType(c: Char): CharType =
     c match {
-      case '('                            => LParenType()
-      case ')'                            => RParenType()
-      case x if x.isDigit                 => NumberType(x)
-      case x if x.isLetter || x.isControl => SymbolType(x)
-      case x if x.isWhitespace            => SpaceType()
-      case x                              => MismatchType(x)
+      case '('                               => LParenType()
+      case ')'                               => RParenType()
+      case x if x.isDigit                    => NumberType(x)
+      case x if x.isLetter                   => SymbolType(x)
+      case '+' | '-' | '*' | '/' | ',' | '?' => SymbolType(c)
+      case x if x.isWhitespace               => SpaceType()
+      case x                                 => MismatchType(x)
     }
 
   @tailrec
@@ -39,7 +40,7 @@ object Lexer {
       case Nil => PartialToken(token, Nil)
     }
 
-  private def readTokens(list: List[Char]): List[Option[Token]] =
+  private def readTokens(list: List[Char]): List[Option[Token]] = {
     list match {
       case x :: xs =>
         charType(x) match {
@@ -54,9 +55,11 @@ object Lexer {
           case SpaceType()         => readTokens(xs)
           case MismatchType(value) => List(None)
         }
-      case Nil => List(None)
+      case Nil => Some(EOFToken()) :: Nil
     }
+  }
 
-  def fromString(source: String): Option[List[Token]] =
+  def fromString(source: String): Option[List[Token]] = {
     readTokens(source.toList).sequence
+  }
 }
