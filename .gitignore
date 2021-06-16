@@ -1,0 +1,8 @@
+.idea
+.bsp
+out
+project/**/
+target
+
+.DS_Store
+*.class
